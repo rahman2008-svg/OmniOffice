@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OmniOffice</string>
+    <string name="doc_type_word">Document</string>
+    <string name="doc_type_sheet">Spreadsheet</string>
+    <string name="doc_type_slide">Presentation</string>
+    <string name="doc_type_pdf">PDF Reader</string>
+</resources>
