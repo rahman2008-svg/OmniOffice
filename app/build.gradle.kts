@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.secrets)
 }
 
+/* ===================== ANDROID ===================== */
 android {
     namespace = "com.example"
     compileSdk = 36
@@ -60,10 +61,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         compose = true
         buildConfig = true
@@ -76,17 +73,21 @@ android {
     }
 }
 
-/* =======================
-   SECRETS CONFIG
-======================= */
+/* ===================== JAVA/KOTLIN TOOLCHAIN FIX ===================== */
+kotlin {
+    jvmToolchain(17)
+}
+
+/* ===================== SECRETS ===================== */
 secrets {
     propertiesFileName = ".env"
     defaultPropertiesFileName = ".env.example"
 }
 
+/* ===================== DEPENDENCIES ===================== */
 dependencies {
 
-    // ================= Compose =================
+    // ---------- Compose ----------
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
@@ -96,18 +97,18 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
-    // ================= Core =================
+    // ---------- Core ----------
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
-    // ================= Database =================
+    // ---------- Room ----------
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
-    // ================= Network =================
+    // ---------- Network ----------
     implementation(libs.retrofit)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
@@ -115,15 +116,15 @@ dependencies {
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
 
-    // ================= Coroutines =================
+    // ---------- Coroutines ----------
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
 
-    // ================= Firebase =================
+    // ---------- Firebase ----------
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.ai)
 
-    // ================= Test =================
+    // ---------- Tests ----------
     testImplementation(libs.junit)
     testImplementation(libs.androidx.junit)
     testImplementation(libs.androidx.core)
